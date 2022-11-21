@@ -1,7 +1,10 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Detail from "./routes/Detail";
+import ChecklistPage from "./routes/ChecklistPage";
 import Home from "./routes/Home";
-import Bubble from "./routes/Bubble";
+import CalenderPage from "./routes/CalenderPage";
+import DocumentPage from "./routes/DocumentPage";
+import ProgressPage from "./routes/ProgressPage";
+
 import {useState,useEffect} from "react"
 import { BrowserView, MobileView } from 'react-device-detect'
 function App() {
@@ -10,13 +13,18 @@ function App() {
     <Router>
         <Switch>
         {/* <MobileView> */}
-            <Route path='/movie/:id'> 
+            <Route path='/checklist'> 
             {/* path는 경로 컴포넌트로 사이트 띄우기 */}
-              <Detail/>
+              <ChecklistPage/>
             </Route>
-
-            <Route path='/bubble'>
-                <Bubble/>
+            <Route path='/calender'>
+                <CalenderPage/>
+            </Route>
+            <Route path='/progress'>
+                <ProgressPage/>
+            </Route>
+            <Route path='/document'>
+                <DocumentPage/>
             </Route>
             <Route path='/'>
                 <Home/>

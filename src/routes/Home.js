@@ -1,29 +1,49 @@
-import {BrowserRouter as Router, Link} from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch,faHouse,faUser,faStar,faClapperboard } from '@fortawesome/free-solid-svg-icons'
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { ConsoleView } from "react-device-detect";
+import axios from 'axios';
 
 function Home() {
+  const [file, setFile] = useState()
 
- return (
-  <div>
-    <div>
-      Bubble
-    </div>
-    <div>
-      <input type="text" placeholder="Drag Bubbles!"/>
-      <Link to="/bubble">
-      <button><FontAwesomeIcon icon={faSearch} className="search" /></button>
-      </Link>
-    </div>
-    <div>      
-      <button ><FontAwesomeIcon icon={faHouse} /></button>
-      <button ><FontAwesomeIcon icon={faUser} /></button>
-      <button ><FontAwesomeIcon icon={faStar} /></button>
-      <button ><FontAwesomeIcon icon={faClapperboard} /></button>
+  function handleChange(event) {
+    setFile(event.target.files[0])
+  }
+  
+  function handleSubmit(event) {
+    event.preventDefault()
+    const url = '/uploadFile';
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('fileName', file.name);
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    };
+    axios.post(url, formData, config).then((response) => {
+      console.log(response.data);
+    });
 
+  }
+  return(
+    <div>
+      <div>
+      <div><a href='./document'>document</a></div>
+      <div><a href='./calender'>calender</a></div>
+      <div><a href='./progress'>progress</a></div>
+      <div><a href='./checklist'>checklist</a></div>
       </div>
-  </div>
- );
+      <div className="App">
+        <form>
+          <h1>React File Upload</h1>
+          <input type="file" />
+          <button type="submit">Upload</button>
+        </form>
+    </div>
 
+
+    </div>
+  );
 }
 export default Home;
