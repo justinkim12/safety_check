@@ -4,7 +4,7 @@ import Home from "./routes/Home";
 import CalenderPage from "./routes/CalenderPage";
 import DocumentPage from "./routes/DocumentPage";
 import ProgressPage from "./routes/ProgressPage";
-import ProgressPage from "./routes/Test";
+import Test from "./routes/Test";
 
 import {useState,useEffect} from "react"
 import { BrowserView, MobileView } from 'react-device-detect'
