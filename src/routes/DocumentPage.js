@@ -29,6 +29,7 @@ function DocumentPage() {
           <td>{info.updated_date}</td>
           <td>{info.doc_id}</td>          
           <td>{info.doc_name}</td>
+          <td>{info.doc_type}</td>
           {/* <td>download</td> */}
                
         </tr>
@@ -42,9 +43,10 @@ function DocumentPage() {
             <table className="table table-striped">
                 <thead>
                     <tr>
-                    <th>Updated Date</th>
+                    <th>UPDATED DATE</th>
                     <th>ID</th>
                     <th>DOC NAME</th>
+                    <th>DOC TYPE</th>
                     {/* <th>DOWNLOAD</th> */}
 
                     </tr>
