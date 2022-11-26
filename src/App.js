@@ -4,6 +4,7 @@ import Home from "./routes/Home";
 import CalenderPage from "./routes/CalenderPage";
 import DocumentPage from "./routes/DocumentPage";
 import ProgressPage from "./routes/ProgressPage";
+import ProgressPage from "./routes/Test";
 
 import {useState,useEffect} from "react"
 import { BrowserView, MobileView } from 'react-device-detect'
@@ -23,12 +24,16 @@ function App() {
             <Route path='/progress'>
                 <ProgressPage/>
             </Route>
-            <Route path='/document'>
+            <Route path='/document/:id'>
                 <DocumentPage/>
+            </Route>
+            <Route path='/test'>
+                <Test/>
             </Route>
             <Route path='/'>
                 <Home/>
             </Route>
+
 
         {/* </MobileView> */}
         </Switch>

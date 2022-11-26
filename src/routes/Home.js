@@ -4,6 +4,7 @@ import { ConsoleView } from "react-device-detect";
 import axios from 'axios';
 
 function Home() {
+  var id=11;
   const [file, setFile] = useState()
 
   function handleChange(event) {
@@ -26,6 +27,8 @@ function Home() {
     });
 
   }
+
+
   return(
     <div>
       <div>
@@ -34,13 +37,13 @@ function Home() {
       <div><a href='./progress'>progress</a></div>
       <div><a href='./checklist'>checklist</a></div>
       </div>
-      <div className="App">
-        <form>
-          <h1>React File Upload</h1>
-          <input type="file" />
-          <button type="submit">Upload</button>
+      <div class="row">
+        <form action={`/221119_save/filesLogic.php?id=${id}`} method="post" enctype="multipart/form-data" >
+          <h3>Upload File</h3>
+          <input type="file" name="myfile"/>
+          <button type="submit" name="save">upload</button>
         </form>
-    </div>
+      </div>
 
 
     </div>
