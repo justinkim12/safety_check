@@ -1,35 +1,27 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ChecklistPage from "./routes/ChecklistPage";
 import Home from "./routes/Home";
-import CalenderPage from "./routes/CalenderPage";
 import DocumentPage from "./routes/DocumentPage";
 import ProgressPage from "./routes/ProgressPage";
-import Test from "./routes/Test";
 
-import {useState,useEffect} from "react"
-import { BrowserView, MobileView } from 'react-device-detect'
 function App() {
 
   return (
     <Router>
         <Switch>
-        {/* <MobileView> */}
+             {/*체크리스트페이지  */}
             <Route path='/checklist'> 
-            {/* path는 경로 컴포넌트로 사이트 띄우기 */}
               <ChecklistPage/>
             </Route>
-            <Route path='/calender'>
-                <CalenderPage/>
-            </Route>
+            {/*프로그래스페이지  */}
             <Route path='/progress'>
                 <ProgressPage/>
             </Route>
+            {/*도큐먼트페이지  */}
             <Route path='/document/:id'>
                 <DocumentPage/>
             </Route>
-            <Route path='/test'>
-                <Test/>
-            </Route>
+            {/*홈페이지  */}
             <Route path='/'>
                 <Home/>
             </Route>

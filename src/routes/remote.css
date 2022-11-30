@@ -1,0 +1,53 @@
+.remote {
+    display: block;
+    position: fixed;
+    top: 287px;
+    right: 42%;
+    z-index: 1000;
+
+    margin-right: -615px;
+    text-align: center;
+    width: 119px;
+    padding-bottom: 4px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    background: #e2e3e3
+}
+
+.remote .h_area {
+    cursor: move;
+    padding: 8px 0;
+    background: url(https://ssl.pstatic.net/static/comic/images/2012/remote_bg_t.gif) no-repeat
+}
+.remote .h_area strong,
+.remote_area .remote [class^=btn_] {
+    display: inline-block;
+}
+.remote .h_area strong {
+    display: block;
+    overflow: hidden;
+    width: 31px;
+    height: 13px;
+    margin: 0 auto;
+    text-indent: -999px
+}
+
+
+.remote_cont .pg_area {
+    padding: 0 5px 15px;
+    border-bottom: 1px solid #e2e3e3
+}
+.remote_cont .pg_area input {
+    height: 18px;
+    padding: 0;
+    border: 1px solid #d9d9d9;
+    line-height: 18px;
+    color: #000;
+    text-align: center;
+    vertical-align: middle
+}
+.remote_cont .pg_area span {
+    margin-left: -2px;
+    color: #c0c0c0;
+    vertical-align: middle
+}
