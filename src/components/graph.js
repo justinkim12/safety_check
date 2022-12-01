@@ -71,7 +71,7 @@ setcheck(result_array);
     f=1;
   var data = {
     "name": "nivo",
-    "color": "hsl(288, 70%, 50%)",
+    "color": "hsl(0, 0%, 50%)",
     "children": [
 
           {
@@ -112,8 +112,8 @@ setcheck(result_array);
         
       ,
       {
-        "name": "Not Checked",
-        "color": "hsl(83, 70%, 50%)",
+        "name": "Result NonPass",
+        "color": "hsl(0, 0%, 50%)",
         "loc": 1-check[0]/total[0] + 1-check[1]/total[1] + 1-check[2]/total[2] + 1-check[3]/total[3] + 1-check[4]/total[4] + 1-check[5]/total[5] +1-check[6]/total[6]
       }
 
@@ -257,7 +257,7 @@ setcheck(result_array);
 
 
     return (
-      <div style= {(props.id=='main') ? { width: 'auto', height: '310px', margin: '0 auto' } : { width: 'auto', height: '150px', margin: '0 auto' }}>    
+      <div style= {(props.id=='main') ? { width: 'auto', height: '290px', margin: '0 auto' } : { width: 'auto', height: '150px', margin: '0 auto' }}>    
         <ResponsiveSunburst
           data={data}
           margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
@@ -265,7 +265,7 @@ setcheck(result_array);
           value="loc"
           cornerRadius={2}
           borderColor={{ theme: 'background' }}
-          colors={{ scheme: 'paired' }}
+          colors={{ scheme: 'set2' }}
           childColor={{
               from: 'color',
               modifiers: [

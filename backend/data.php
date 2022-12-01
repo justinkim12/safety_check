@@ -1,6 +1,6 @@
 <?php
 
-$dbConn = mysqli_connect("127.0.0.1", "root", "!@#jung4609",
+$dbConn = mysqli_connect("127.0.0.1", "root", "password",
 "esgmanagement") or die("실패 시 출력할 문구");
 
 // MySQL에서 데이터를 가져오기 위한 쿼리문 작성

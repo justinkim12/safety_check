@@ -2,7 +2,7 @@
 
 //data.php
 
-$connect = new PDO("mysql:host=localhost;dbname=esgmanagement", "root", "!@#jung4609");
+$connect = new PDO("mysql:host=localhost;dbname=esgmanagement", "root", "password");
 
 if(isset($_POST["action"]))
 {

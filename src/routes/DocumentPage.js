@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { MdOutlineFactCheck } from "react-icons/md";
 //
 function DocumentPage() {
    const {id}=useParams();
@@ -39,7 +40,23 @@ function DocumentPage() {
     return (
 
         <div>
-
+      <div id="title"> 
+          <a href="/">
+          <MdOutlineFactCheck style={{'padding-left':'30px',color:'white', width:'45px', height:'45px'}}/>
+          </a>
+          <a href="/"><div id='title_text'>ESG {'\n'} Manager</div>
+          </a>
+          {/* 메뉴바 추가함 */}
+          <div id='menubar'>
+              <ul>
+                  <li><a href="/" style={{'text-decoration': 'none'}}>HOME</a></li>
+                  <li><a href="/progress" style={{'text-decoration': 'none'}}>PROGRESS</a></li>
+                  <li><a href="/checklist" style={{'text-decoration': 'none'}}>CHECKLIST</a></li>
+              </ul>
+          </div>
+              
+          
+      </div>
             <table className="table table-striped">
                 <thead>
                     <tr>

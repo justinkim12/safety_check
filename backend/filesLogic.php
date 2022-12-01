@@ -2,7 +2,7 @@
 // 한국 시간 
 date_default_timezone_set('Asia/Seoul'); 
 // connect to the database
-$conn = mysqli_connect('localhost', 'root', '!@#jung4609', 'esgmanagement');
+$conn = mysqli_connect('localhost', 'root', 'password', 'esgmanagement');
 
 $sql = "SELECT * FROM document";
 $result = mysqli_query($conn, $sql);

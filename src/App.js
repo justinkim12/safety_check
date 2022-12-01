@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ChecklistPage from "./routes/ChecklistPage";
 import Home from "./routes/Home";
+// import Test from "./routes/Test";
 import DocumentPage from "./routes/DocumentPage";
 import ProgressPage from "./routes/ProgressPage";
 
@@ -21,6 +22,9 @@ function App() {
             <Route path='/document/:id'>
                 <DocumentPage/>
             </Route>
+            {/* <Route path='/test'>
+                <Test/>
+            </Route> */}
             {/*홈페이지  */}
             <Route path='/'>
                 <Home/>

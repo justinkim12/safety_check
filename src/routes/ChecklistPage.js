@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Redirect,useParams } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import { ConsoleView } from "react-device-detect";
 import jquery from 'jquery';
@@ -7,11 +7,25 @@ import './checklist.css';
 import './remote.css';
 import { useLocation } from 'react-router';
 import qs from "query-string"; 
+import { MdOutlineFactCheck } from "react-icons/md";
 
 function ChecklistPage() {
   //loading state
   const [loading,setLoading]=useState(true);
 
+
+  //query string
+
+
+
+
+   //리모콘 파트 
+   var location = '';
+   var [x,setX] = useState();
+   function onTextChange(e){
+     location = e.target.value+'.';
+     setX(location);
+   }
 
   
   //필터링 변수
@@ -19,14 +33,20 @@ function ChecklistPage() {
   const [filter_update,setfilter_update]=useState([]);
   const [filter_check,setfilter_check]=useState([]);
   const [check_bool,setcheck_bool]=useState(false);
+  const [update_bool,setupdate_bool]=useState(false);
   const [reminder_bool,setreminder_bool]=useState(false);
   const [result_bool,setresult_bool]=useState(false);
   const [filter_reminder,setfilter_reminder]=useState([]);
-  const [filter_result,setfilter_resutl]=useState([]);
+
+  const [filter_result,setfilter_result]=useState([]);
 
 //첫 화면 php 연동 및 데이터 처리
   const [json_data,setjson_data]=useState([]); //변수 선언
-  //const [data,setData]=useState([]);
+
+  //query string
+  const searchParams = useLocation().search;
+  const query = qs.parse(searchParams);
+
   useEffect(() => {
     
     const getDetail = async () => {
@@ -42,8 +62,11 @@ function ChecklistPage() {
     console.log(loading);
     setLoading(false);
     console.log(json_data);
+
+
+
   },[loading]);
-  
+
 
 
   const [bChecked, setChecked] = useState(false);//랜더링 시간 로딩용
@@ -97,6 +120,7 @@ function ChecklistPage() {
     setuniversal_set(json_data.map((info)=>(info.checklist_id)));
     setfilter_check(universal_set);
     setfilter_reminder(universal_set);
+    setfilter_result(universal_set);
     console.log(universal_set);
     json_data.map(
       function(e){
@@ -163,10 +187,12 @@ function ChecklistPage() {
       if(!filter_update.includes(info.checklist_id)){           
         if(filter_check.includes(info.checklist_id)){
           if(filter_reminder.includes(info.checklist_id)){ 
-
+            if(filter_result.includes(info.checklist_id)){
       return(
         
-        <tr id={info.checklist_id} key={info.checklist_id}>
+        <tr id={info.checklist_id} 
+        key={info.checklist_id}
+        style={{textAlign:'center'}}>
           <td>{info.checklist_id}</td>
           <td>{info.contents}</td>          
           <td>{info.viewpoint}</td>
@@ -351,7 +377,7 @@ function ChecklistPage() {
           <td > 
             <form action={`/221119_save/filesLogic.php?type=rule&id=${info.checklist_id}`} method="post" enctype="multipart/form-data"  >
                 <div>
-              <input style={{width:'82%'}}  type="file" name="myfile"/>
+              <input style={{width:'79%'}}  type="file" name="myfile"/>
               </div>
               <button type="submit" name="save">upload</button>
               <div><a href={`/document/${info.checklist_id}`}>history</a></div>
@@ -360,16 +386,29 @@ function ChecklistPage() {
           <td>
             <form action={`/221119_save/filesLogic.php?type=evid&id=${info.checklist_id}`} method="post" enctype="multipart/form-data"  >
 
-              <input style={{width:'78%'}} type="file" name="myfile"/>
+              <input style={{width:'79%'}} type="file" name="myfile"/>
               <button type="submit" name="save">upload</button>
               <div><a href={`/document/${info.checklist_id}`}>history</a></div>
             </form>
           </td>          
         </tr>
-      )}}}
+      )}}}}
+
     }
   ))
   
+//프로그래스에서 그래프 클릭 후 링크 타고 오는 부분 처리
+  useEffect(()=>{
+
+    if(query.id)
+      setX(query.id);
+    if(document.getElementById(query.id)){
+
+        document.getElementById('move').click();
+        
+     }
+    //  window.location.href='./checklist';
+ },[result,loading,universal_set]);
 
   
 //체크리스트와 같은 변동 되는 데이터 처리 jquery
@@ -394,12 +433,13 @@ useEffect(() => {
          })
         })
       });
+
     }, []);
 
 
 // 상단 필터링 버튼 부분
     const filtering_update=(set,{target})=>{
-      
+      setupdate_bool(!update_bool);
       setfilter_update(difference(filter_update,set));
       console.log(filter_update);
 
@@ -428,7 +468,7 @@ useEffect(() => {
       }, {});
       console.log(complement(universal_set,Object.keys(filtered)));
 
-      setfilter_reminder(result_bool? universal_set:complement(universal_set,Object.keys(filtered)));
+      setfilter_result(result_bool? universal_set:complement(universal_set,Object.keys(filtered)));
 
 
     }
@@ -436,9 +476,8 @@ useEffect(() => {
 
 
   //query string part
-  const searchParams = useLocation().search;
-  const query = qs.parse(searchParams);
-  console.log(query.type);
+
+
     useEffect(() => {  
       if(query.type=='reminder'){
       setreminder_bool(!reminder_bool);
@@ -451,28 +490,56 @@ useEffect(() => {
         setfilter_check(check_bool?universal_set:Array.from(checkedItems_ischecked));
 
       }
+      if(query.type=='result'){
+        filtering_result();
+
+      }
+
     
+  
+
     },[universal_set]);
 
-   //리모콘 파트 
-    var location = '';
-    var [x,setX] = useState();
-    function onTextChange(e){
-      location = e.target.value;
-      setX(location);
-    }
+
+
 
  return (
-  <div>   
+  
+  <div>  
+    <div id="title"> 
+        <a href="/">
+        <MdOutlineFactCheck style={{'padding-left':'30px',color:'white', width:'45px', height:'45px'}}/>
+        </a>
+        <a href="/"><div id='title_text'>ESG {'\n'} Manager</div>
+        </a>
+        <div id='menubar'>
+            <ul>
+                <li><a href="/" style={{'text-decoration': 'none'}}>HOME</a></li>
+                <li><a href="/progress" style={{'text-decoration': 'none'}}>PROGRESS</a></li>
+                <li><a href="/checklist" style={{'text-decoration': 'none'}}>CHECKLIST</a></li>
+            </ul>
+        </div>
+            
+        
+        </div>
+
+
     <div class="remote">
           <div class="h_area"> 리모컨 </div>
           <div class="remote_cont">
             <div class="pg_area">
               <input type="text" size="3" onChange={onTextChange} />
-              <button> <a href={"#"+x} style={{color:'black', 'text-decoration':'none'}}>Move</a> </button>
+              <button> <a id='move' href={"#"+x} style={{color:'black', 'text-decoration':'none'}}>Move</a> </button>
               <button onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }) }}> Top </button>
               <button onClick={() => { window.scrollTo({ top: 99999999, behavior: "smooth" }) }}> Bottom </button>
+              <br></br>
+              <div>필터링</div>
+              <div><button onClick={(e) => {filtering_result()}} ><span style={{color:result_bool?'blue':'black'}}>{result_bool?'Non Pass':'Result'}</span></button></div>
+              <div><button onClick={(e) => {filtering_update(Object.keys(updated_date),e);}} ><span style={{color:update_bool?'blue':'black'}}>{update_bool?'Updated X':' Updated Date '}</span></button></div>
+              <div><button onClick={(e) => {filtering_check()}} ><span style={{color:check_bool?'blue':'black'}}>{check_bool?'Checked O':'Check'}</span></button></div>
+              <div><button onClick={(e) => {filtering_reminder()}} ><span style={{color:reminder_bool?'blue':'black'}}>{reminder_bool?'Reminder O':'Reminder'}</span></button></div>
             </div>
+           
             <div>
               <button id="save"> Save </button>
             </div>
@@ -486,10 +553,14 @@ useEffect(() => {
           <th>viewpoint</th>
           <th> main_dept </th>
           <th>related_dept</th>
-          <th style={{width:'10%'}}><button onClick={(e) => {filtering_result()}} >result</button></th>
-          <th><button onClick={(e) => {filtering_update(Object.keys(updated_date),e);}} >updated_date</button></th>
-          <th><button onClick={(e) => {filtering_check()}} >is_checked</button></th>
-          <th><button onClick={(e) => {filtering_reminder()}} >reminder</button></th>
+          <th style={{width:'10%'}}>result
+            </th>
+          
+
+
+          <th>updated_date</th>
+          <th>is_checked</th>
+          <th>reminder</th>
           <th>rule_doc_id</th>
           <th>evid_doc_id</th>
         </tr>
