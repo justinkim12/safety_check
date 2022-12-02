@@ -51,7 +51,7 @@ function ChecklistPage() {
     
     const getDetail = async () => {
         const json = await (
-            await fetch(`/221119_save/data.php?data=checklist`)//php data 호출
+            await fetch(`/backend/data.php?data=checklist`)//php data 호출
         ).json();
        
           setjson_data(json);//변수에 저장
@@ -375,7 +375,7 @@ function ChecklistPage() {
       </div>):null}</td>   
           
           <td > 
-            <form action={`/221119_save/filesLogic.php?type=rule&id=${info.checklist_id}`} method="post" enctype="multipart/form-data"  >
+            <form action={`/backend/filesLogic.php?type=rule&id=${info.checklist_id}`} method="post" enctype="multipart/form-data"  >
                 <div>
               <input style={{width:'79%'}}  type="file" name="myfile"/>
               </div>
@@ -384,7 +384,7 @@ function ChecklistPage() {
             </form>
           </td>          
           <td>
-            <form action={`/221119_save/filesLogic.php?type=evid&id=${info.checklist_id}`} method="post" enctype="multipart/form-data"  >
+            <form action={`/backend/filesLogic.php?type=evid&id=${info.checklist_id}`} method="post" enctype="multipart/form-data"  >
 
               <input style={{width:'79%'}} type="file" name="myfile"/>
               <button type="submit" name="save">upload</button>
@@ -416,7 +416,7 @@ useEffect(() => {
   $(document).ready(function(){
          $('#save').click(function(){
           $.ajax({
-            url:`/221119_save/parsing.php`,
+            url:`/backend/parsing.php`,
             method:"POST",
             data:{
               action:'save', 

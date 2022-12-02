@@ -18,7 +18,7 @@ function ProgressPage(){
       
       const getDetail = async () => {
           const json = await (
-              await fetch(`/221119_save/data.php?data=checklist`)//php data 호출
+              await fetch(`/backend/data.php?data=checklist`)//php data 호출
           ).json();
          
             setjson_data(json);//변수에 저장

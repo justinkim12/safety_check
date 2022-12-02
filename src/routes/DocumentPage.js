@@ -11,7 +11,7 @@ function DocumentPage() {
     
     const getDetail = async () => {
         const json = await (
-            await fetch(`/221119_save/data.php?data=document&id=${id}`)//php data 호출
+            await fetch(`/backend/data.php?data=document&id=${id}`)//php data 호출
         ).json();
        
           setjson_data(json);//변수에 저장
