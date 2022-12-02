@@ -25,13 +25,16 @@ npm install
 npm add @nivo/core @nivo/sunburst
 ```
 
-### php 설정
+### php 및 sql 설정
 
 1. WAMP 설치(기본 경로인 C 드라이브)
 
 1. 이후 C:\Bitnami\wampstack-7.4.29-0\apache2\htdocs (wampstack 버젼 차이는 있을 수 있음) 폴더 로 이동
 2. backend 폴더를 해당 폴더에 복사, 붙여넣기
 3. package.json 내에 "proxy": "[http://127.0.0.1:80](http://127.0.0.1/)" 추가
+4. MySql localhost 서버 연결
+5. localhost 내에 database_sql 파일 실행
+6. data.php 파일의 $dbConn, fileLogic.php 파일의 $conn, $parsing.php 파일의 $connect 안의 password를 본인 비밀번호로 수정
 
 ## 🔧 기능 소개
 
@@ -74,9 +77,40 @@ npm add @nivo/core @nivo/sunburst
     ![KakaoTalk_Photo_2022-12-02-15-59-04.png](Readme%2048aa66913a4d4850b7e97c1d86d216d4/KakaoTalk_Photo_2022-12-02-15-59-04.png)
     
     문서 업로드 로그 확인 가능
-    
 
-route/home.js : 대시보드
+***
+    
++public 폴더 : 기본적 html 틀 폴더
+
++ src 폴더 : 실질적 javascript 코드 폴더
+    + components 폴더 : 그래프와 캘린더 기능 수행의 컴포넌트 폴더
+        + src/components/Cal.js : 캘린더 컴포넌트 
+            + 일정 등록 
+            + 일정 수정(drag&drop 가능) 
+            + 일정 삭제
+        + src/components/graph.js : 그래프 폴더
+            - DB 미해결 항목 데이터 기반 그래프 생성
+    
+    + routes 폴더 : 각 페이지별 구현 코드
+        + src/route/Home.js : 대시보드 
+            + src/route/Home.css : 대시보드 css 파일
+        + src/route/ProgressPage.js : 진행률 페이지
+            + src/route/Progress.css : 진행률 페이지 css 파일
+        + src/route/ChecklistPage.js : 체크리스트 페이지
+            + src/route/checklist.js : 체크리스트 페이지 css 파일
+            + src/route/remote.css : 체크리스트 내 리모콘 css 파일
+        + src/route/DocumentPage.js : 문서 로그 페이지
+
++ backend 폴더 : DB 관련 폴더 
+    + uploads 폴더 : 문서 저장 경로 폴더
+    + backend/data.php : MySQL에서 테이블 데이터를 가져오는 PHP 파일
+    + backend/fileLogic.php : 문서 업로드 시 문서 데이터 처리하는 PHP 파일
+    + backend/parsing.php : 체크리스트 데이터 저장 시 DB로 데이터 전송하는 PHP 파일
+    + database_sql.sql : DB 서버 생성용 sql 파일
+
+
+
+
 
 ## 📖 기술 스택
 
