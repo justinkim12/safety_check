@@ -1,6 +1,5 @@
 <?php
-
-//data.php
+//Save 버튼 누를 시 데이터를 MySql로 보내는 PHP
 
 $connect = new PDO("mysql:host=localhost;dbname=esgmanagement", "root", "password");
 

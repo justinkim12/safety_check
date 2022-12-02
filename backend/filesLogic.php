@@ -1,4 +1,6 @@
 <?php
+// 체크리스트에서 문서 업로드 시 파일을 저장하는 PHP 파일
+
 // 한국 시간 
 date_default_timezone_set('Asia/Seoul'); 
 // connect to the database
@@ -28,7 +30,7 @@ if (isset($_POST['save'])) { // if save button on the form is clicked
     $type=$_GET['type'];
     if (!in_array($extension, ['zip', 'pdf', 'docx'])) {
         echo "You file extension must be .zip, .pdf or .docx";
-    } elseif ($_FILES['myfile']['size'] > 1000000) { // file shouldn't be larger than 1Megabyte
+    } elseif ($_FILES['myfile']['size'] > 100000000) { // file shouldn't be larger than 100Megabyte
         echo "File too large!";
     } else {
 
@@ -55,37 +57,37 @@ if (isset($_POST['save'])) { // if save button on the form is clicked
 }
 
 // Downloads files
-if (isset($_GET['file_id'])) {
-    $id = $_GET['file_id'];
+// if (isset($_GET['file_id'])) {
+//     $id = $_GET['file_id'];
 
-    // fetch file to download from database
-    $sql = "SELECT * FROM document WHERE doc_id=$id";
-    $result = mysqli_query($conn, $sql);
+//     // fetch file to download from database
+//     $sql = "SELECT * FROM document WHERE doc_id=$id";
+//     $result = mysqli_query($conn, $sql);
 
-    $file = mysqli_fetch_assoc($result);
-    $filepath = 'uploads/' . $file['doc_name'];
+//     $file = mysqli_fetch_assoc($result);
+//     $filepath = 'uploads/' . $file['doc_name'];
 
-    if (file_exists($filepath)) {
-        header('Content-Description: File Transfer');
-        header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename=' . basename($filepath));
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate');
-        header('Pragma: public');
-        header('Content-Length: ' . filesize('uploads/' . $file['doc_name']));
+//     if (file_exists($filepath)) {
+//         header('Content-Description: File Transfer');
+//         header('Content-Type: application/octet-stream');
+//         header('Content-Disposition: attachment; filename=' . basename($filepath));
+//         header('Expires: 0');
+//         header('Cache-Control: must-revalidate');
+//         header('Pragma: public');
+//         header('Content-Length: ' . filesize('uploads/' . $file['doc_name']));
         
-        //This part of code prevents files from being corrupted after download
-        ob_clean();
-        flush();
+//         //This part of code prevents files from being corrupted after download
+//         ob_clean();
+//         flush();
         
-        readfile('uploads/' . $file['doc_name']);
+//         readfile('uploads/' . $file['doc_name']);
 
-        // Now update downloads count
-        // $newCount = $file['downloads'] + 1;
-        // $updateQuery = "UPDATE files SET downloads=$newCount WHERE id=$id";
-        // mysqli_query($conn, $updateQuery);
-        exit;
-    }
+//         // Now update downloads count
+//         // $newCount = $file['downloads'] + 1;
+//         // $updateQuery = "UPDATE files SET downloads=$newCount WHERE id=$id";
+//         // mysqli_query($conn, $updateQuery);
+//         exit;
+//     }
 
-}
+// }
 ?>

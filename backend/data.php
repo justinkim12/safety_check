@@ -1,9 +1,12 @@
+
+
+
 <?php
+// MySQL에서 테이블 데이터를 가져오는 PHP 파일
+
 
 $dbConn = mysqli_connect("127.0.0.1", "root", "password",
 "esgmanagement") or die("실패 시 출력할 문구");
-
-// MySQL에서 데이터를 가져오기 위한 쿼리문 작성
 
 if($_GET['data']=='checklist'){
     $sql = "select * from Checklist where checklist_id<10

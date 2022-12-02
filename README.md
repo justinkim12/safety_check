@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+# Readme
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 프로젝트 소개
 
-## Available Scripts
+### 🌏  ISO45001 인증 진단 및 관리 시스템
 
-In the project directory, you can run:
+- 국제표준화기구 ISO의 ISO45001:2018 안전보건경영시스템 인증을 통과하기 위한 내부심사 체크리스트 및 문서관리 툴입니다.
+- 시각화 된 대시보드를 통해 한눈에 전체 진행률을 파악할 수 있으며, 반기별 점검 항목 및 미해결 항목, 자체 점검 항목을 확인 할 수 있습니다.
 
-### `npm start`
+### 🎯 개발 목적 및 필요성
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 중대재해처벌법 시행으로 인해(2022) 기업들은 해당 시행령을 만족해야만 합니다.
+- 소기업들은 안전보건관리체계 구축에 힘듦을 겪는데, 표준화된 안전관리 규정 절차 만드는 것에서 가장 어려움을 느끼고, 파일을 5년동안 보관하고, 인수인계하는것에 어려움을 느끼고 있습니다.
+- 중대재해처벌법 시행령은 모두 ISO45001의 항목과 대응되며, 이 프로그램을 사용하는 것으로 기업들이 중대재해처벌법의 시행령을 만족함과 동시에 ISO 45001인증도 통과할 수 있도록 유도할 수 있습니다.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ❗Setup
 
-### `npm test`
+### React 앱 구동을 위한 기본 설정
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+프로젝트 폴더로 이동하여 해당 명령어 실행. 
 
-### `npm run build`
+```bash
+npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+npm add @nivo/core @nivo/sunburst
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### php 설정
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. WAMP 설치(기본 경로인 C 드라이브)
 
-### `npm run eject`
+1. 이후 C:\Bitnami\wampstack-7.4.29-0\apache2\htdocs (wampstack 버젼 차이는 있을 수 있음) 폴더 로 이동
+2. backend 폴더를 해당 폴더에 복사, 붙여넣기
+3. package.json 내에 "proxy": "[http://127.0.0.1:80](http://127.0.0.1/)" 추가
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🔧 기능 소개
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- 대시보드
+    
+    ![KakaoTalk_Photo_2022-12-02-15-58-56.png](Readme%2048aa66913a4d4850b7e97c1d86d216d4/KakaoTalk_Photo_2022-12-02-15-58-56.png)
+    
+    반기별 1회 확인 필요 항목 표시
+    
+    캘린더 위젯
+    
+    자체 점검항목 표시
+    
+    미해결 항목 표시
+    
+- 진행률 페이지
+    
+    ![KakaoTalk_Photo_2022-12-02-15-58-41.png](Readme%2048aa66913a4d4850b7e97c1d86d216d4/KakaoTalk_Photo_2022-12-02-15-58-41.png)
+    
+    전체 진행률 확인
+    
+    요소별 진행률 확인
+    
+- 체크리스트 페이지
+    
+    ![KakaoTalk_Photo_2022-12-02-15-58-49.png](Readme%2048aa66913a4d4850b7e97c1d86d216d4/KakaoTalk_Photo_2022-12-02-15-58-49.png)
+    
+    담당 부서, 심사 결과 관리
+    
+    항목 별 관련 문서 업로드, 로그 처리
+    
+    관리자가 임의로 점검하고자 하는 항목 체크
+    
+    미해결, 자체점검, 반기별 심사항목 필터링
+    
+    리모콘으로 원하는 항목 번호 입력해 이동
+    
+- 문서 로그 페이지
+    
+    ![KakaoTalk_Photo_2022-12-02-15-59-04.png](Readme%2048aa66913a4d4850b7e97c1d86d216d4/KakaoTalk_Photo_2022-12-02-15-59-04.png)
+    
+    문서 업로드 로그 확인 가능
+    
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+route/home.js : 대시보드
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 📖 기술 스택
 
-## Learn More
+### Front&Backend
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+React 18.2.0
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+php 7.4.29
 
-### Code Splitting
+mysql 8.0.28
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+apache 7.4.29
 
-### Analyzing the Bundle Size
+### Library
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+axios
 
-### Making a Progressive Web App
+nivo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 💽 DB구조
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![KakaoTalk_Image_2022-12-02-15-39-59.png](Readme%2048aa66913a4d4850b7e97c1d86d216d4/KakaoTalk_Image_2022-12-02-15-39-59.png)
