@@ -78,9 +78,8 @@ npm add @nivo/core @nivo/sunburst
     
     문서 업로드 로그 확인 가능
 
-***
     
-+public 폴더 : 기본적 html 틀 폴더
++ public 폴더 : 기본적 html 틀 폴더
 
 + src 폴더 : 실질적 javascript 코드 폴더
     + components 폴더 : 그래프와 캘린더 기능 수행의 컴포넌트 폴더

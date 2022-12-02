@@ -7,6 +7,7 @@ import ProgressPage from "./routes/ProgressPage";
 
 function App() {
 
+  
   return (
     <Router>
         <Switch>
